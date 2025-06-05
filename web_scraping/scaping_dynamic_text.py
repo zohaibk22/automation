@@ -20,3 +20,6 @@ def main():
     return text_cleanup(element.text)
 
 print(main())
+
+if __name__ == '__main__':
+    print(main())

@@ -4,6 +4,10 @@ from selenium.webdriver.chrome.service import Service
 service = Service("/Users/zohaibkhan/Downloads/chromedriver")
 
 
+class RunTestClass:
+    def __init__(self):
+        pass
+
 # Create drive and set up driver
 def init_chrome_driver(url):
     
