@@ -1,14 +1,18 @@
 import os
 import yagmail
 import pandas as pd
+from dotenv import load_dotenv
 
 if __name__ == "__main__":
+    # print(os.getcwd(), "currsent working directory")
+    load_dotenv()
 
     df = pd.read_csv('files/contacts.csv')
 
     for row in df.itertuples(index=False):
         name = row.name
         email = row.email
+        print(row, "ROW")
 
         sender = os.getenv('SENDER_EMAIL')
         receiver = email
@@ -17,9 +21,9 @@ if __name__ == "__main__":
         this is a test email to run a automation script
         """.strip()
 
-        yag = yagmail.SMTP(sender, password=os.getenv('SENDER_PASSWORD'))
+        yag = yagmail.SMTP(sender, password=os.getenv('SENDER_EMAIL_PASSWORD'))
 
-        yag.send(to=receiver, subject=subject, contents=body, attachments='files/test.doc')
+        yag.send(to=receiver, subject=subject, contents=body)
 
         print(f"Email sent to {name} at {email}")
 
