@@ -8,22 +8,28 @@ if __name__ == "__main__":
     load_dotenv()
 
     df = pd.read_csv('files/contacts.csv')
+    sender = os.getenv('SENDER_EMAIL')
+    yag = yagmail.SMTP(sender, password=os.getenv('SENDER_EMAIL_PASSWORD'))
+
 
     for row in df.itertuples(index=False):
         name = row.name
         email = row.email
         print(row, "ROW")
 
-        sender = os.getenv('SENDER_EMAIL')
         receiver = email
         subject = f"Hello {name}!"
         body = """
         this is a test email to run a automation script
         """.strip()
 
-        yag = yagmail.SMTP(sender, password=os.getenv('SENDER_EMAIL_PASSWORD'))
 
-        yag.send(to=receiver, subject=subject, contents=body)
+        try:
+
+            yag.send(to=receiver, subject=subject, contents=body, attachments="files/test.doc")
+        except Exception as e:
+            print(f"Failed to send email to {name} at {email}: {e}")
+            continue
 
         print(f"Email sent to {name} at {email}")
 
