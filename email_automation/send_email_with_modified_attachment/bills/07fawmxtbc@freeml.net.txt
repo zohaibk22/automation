@@ -1,0 +1,5 @@
+Dear Jane Smith,
+
+Your bill amount is: $28
+
+Thank you!

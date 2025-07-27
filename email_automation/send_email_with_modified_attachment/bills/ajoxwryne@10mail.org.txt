@@ -1,0 +1,5 @@
+Dear John Doe,
+
+Your bill amount is: $10
+
+Thank you!
