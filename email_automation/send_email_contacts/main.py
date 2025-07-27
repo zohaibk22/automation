@@ -15,6 +15,7 @@ if __name__ == "__main__":
     for row in df.itertuples(index=False):
         name = row.name
         email = row.email
+        file_name = row.filepath.strip() if hasattr(row, 'filepath') else None
         print(row, "ROW")
 
         receiver = email
@@ -25,8 +26,7 @@ if __name__ == "__main__":
 
 
         try:
-
-            yag.send(to=receiver, subject=subject, contents=body, attachments="files/test.doc")
+            yag.send(to=receiver, subject=subject, contents=body, attachments="bills/" + file_name if file_name else None)
         except Exception as e:
             print(f"Failed to send email to {name} at {email}: {e}")
             continue
