@@ -15,12 +15,18 @@ if __name__ == "__main__":
     pdf.cell(w=0,h=50, txt="Description", ln=1)
 
     pdf.set_font(family='Times', size=12)
-    pdf.multi_cell(w=0, h=20, txt="This is my first PDF that I am creating using Python. "
+    text_val = """
+This is my first PDF that I am creating using Python. "
                                  "I am so excited to create more PDFs using Python. "
                                  "I hope you are excited too. "
                                  "I am sure you are excited to create more PDFs using Python. "
                                  "I hope you are excited too. "
-                                 "I am sure you are excited to create more PDFs using Python. "                 "I hope you are excited too. " )
+                                 "I am sure you are excited to create more PDFs using Python. "
+                                 "I hope you are excited too. "
+                                 "I am sure you are excited to create more PDFs using Python. "
+                                 "I hope you are excited too. "
+    """
+    pdf.multi_cell(w=0, h=20, txt=text_val)
 
     output_dir = Path('pdfs')
     output_dir.mkdir(exist_ok=True)
