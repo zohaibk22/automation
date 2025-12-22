@@ -1,5 +1,5 @@
 from PyQt6.QtWidgets import QApplication, QMainWindow, QPushButton, QVBoxLayout, QWidget
-from PyQt6.QtWidgets import QLabel, QPushButton, QLineEdit
+from PyQt6.QtWidgets import QLabel, QPushButton, QLineEdit, QComboBox
 
 from utils.currency_exchange_rate import get_currency
 
@@ -8,8 +8,10 @@ from utils.currency_exchange_rate import get_currency
 def main():
     def show_currency():
         input_text = text.text()
-        result = get_currency(float(input_text))
-        output_label.setText(str(result) + '.')
+        input_currency = in_combo.currentText()
+        target_currency = target_combo.currentText()
+        result = get_currency(float(input_text), from_currency=input_currency, to_currency=target_currency)
+        output_label.setText(f"{input_text} {input_currency} is {result} {target_currency}.")
 
     app = QApplication([])
     window = QWidget()
@@ -18,6 +20,17 @@ def main():
     layout = QVBoxLayout()
     label = QLabel("Enter amount (USD): ")
     layout.addWidget(label)
+
+    in_combo = QComboBox()
+    currencies = ['USD', 'GBP', 'CAD', 'AUD', 'INR']
+    in_combo.addItems(currencies)
+    layout.addWidget(in_combo)
+
+    target_combo = QComboBox()
+    currencies = ['USD', 'GBP', 'CAD', 'AUD', 'INR']
+    target_combo.addItems(currencies)
+    layout.addWidget(target_combo)
+   
    
    
     text = QLineEdit()
